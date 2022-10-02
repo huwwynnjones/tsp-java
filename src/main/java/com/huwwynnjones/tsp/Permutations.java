@@ -1,20 +1,21 @@
 package com.huwwynnjones.tsp;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Permutations<T extends List<?>> implements Iterable<T>  {
+public class Permutations<T extends List<?>> implements Iterable<T> {
     private T a;
     private int n;
     private List<Integer> p;
     private int i;
     private boolean initial_call;
 
-    Permutations (T a) {
-        this.a = a; // copy this to avoid mutating input?
+    Permutations(T a) {
+        this.a = (T) new ArrayList<>(a);
         n = this.a.size();
         p = createIntegerArray(n);
         i = 1;
