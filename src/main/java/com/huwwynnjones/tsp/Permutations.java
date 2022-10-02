@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class Permutations<T extends List<?>> implements Iterable<T> {
     private T a;
@@ -24,6 +26,11 @@ public class Permutations<T extends List<?>> implements Iterable<T> {
 
     public Iterator<T> iterator() {
         return new Itr();
+    }
+
+    public Stream<T> stream(){
+        return StreamSupport.stream(this.spliterator(), false);
+
     }
 
     private class Itr implements Iterator<T> {
