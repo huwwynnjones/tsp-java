@@ -24,11 +24,12 @@ public class Permutations<T extends List<?>> implements Iterable<T> {
         initial_call = true;
     }
 
+    @Override
     public Iterator<T> iterator() {
         return new Itr();
     }
 
-    public Stream<T> stream(){
+    public Stream<T> stream() {
         return StreamSupport.stream(this.spliterator(), false);
 
     }
@@ -38,10 +39,12 @@ public class Permutations<T extends List<?>> implements Iterable<T> {
         Itr() {
         }
 
+        @Override
         public boolean hasNext() {
             return Permutations.this.i < Permutations.this.n;
         }
 
+        @Override
         public T next() {
             if (Permutations.this.initial_call) {
                 Permutations.this.initial_call = false;
