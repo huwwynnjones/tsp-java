@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class App 
 {
@@ -23,7 +25,7 @@ public class App
 
     void run() {
         var costs = loadCostsFromFile();
-        System.out.println(costs);
+        System.out.println(citiesFromCityKeys(costs));
     }
 
     private HashMap<CityKey, Integer> loadCostsFromFile() {
@@ -37,5 +39,10 @@ public class App
             System.err.println(ex);
         }
         return costs;
+    }
+
+    private Set<String> citiesFromCityKeys(HashMap<CityKey, Integer> costs) {
+        var keys = costs.keySet();
+        return keys.stream().flatMap((k) -> List.of(k.start, k.end).stream()).collect(Collectors.toSet());
     }
 }
