@@ -48,8 +48,7 @@ public class Permutations<T extends List<?>> implements Iterable<T> {
         public T next() {
             if (Permutations.this.initial_call) {
                 Permutations.this.initial_call = false;
-                //return (T) List.copyOf(Permutations.this.a);
-                return Permutations.this.a;
+                return (T) copyOf(Permutations.this.a); 
             } else if (Permutations.this.i < Permutations.this.n) {
                 Permutations.this.p.set(Permutations.this.i, (Permutations.this.p.get(Permutations.this.i) - 1));
                 var j = odd(Permutations.this.i) ? Permutations.this.p.get(Permutations.this.i) : 0;
@@ -60,10 +59,15 @@ public class Permutations<T extends List<?>> implements Iterable<T> {
                     Permutations.this.i += 1;
                 }
             }
-            //return (T) List.copyOf(Permutations.this.a);
-            return Permutations.this.a;
+            return (T) copyOf(Permutations.this.a);
         }
 
+    }
+
+    private List<?> copyOf(T a) {
+        var copy = new ArrayList<>();
+        a.forEach((x) -> copy.add(x));
+        return copy;
     }
 
     private boolean odd(int number) {
