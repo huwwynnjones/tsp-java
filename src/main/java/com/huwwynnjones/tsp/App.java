@@ -20,7 +20,7 @@ public class App {
         var cheapestJourneys = new ArrayList<List<String>>();
         var lowestCost = Integer.MAX_VALUE;
 
-        for(var journey: permutations) {
+        for (var journey : permutations) {
             var cityPairs = Util.journeyToCityPairs(journey);
             var currentCost = Util.calculateCost(cityPairs, costs);
             if (currentCost < lowestCost) {

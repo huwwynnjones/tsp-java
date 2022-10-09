@@ -13,7 +13,7 @@ public class Util {
         var keys = costs.keySet();
         return keys.stream().flatMap((k) -> List.of(k.start, k.end).stream()).collect(Collectors.toSet());
     }
-    
+
     static List<List<String>> journeyToCityPairs(List<String> journey) {
         var stack = new ArrayDeque<String>();
         stack.addAll(journey);
@@ -31,13 +31,13 @@ public class Util {
     }
 
     private static int getCost(List<String> pair, HashMap<CityKey, Integer> costs) {
-            var key = new CityKey(pair);
-            if (costs.containsKey(key)) {
-                return costs.get(key);
-            } else if (costs.containsKey(key.reverseKey())){
-                return costs.get(key.reverseKey());
-            } else {
-                throw new RuntimeException(String.format("No costs for %s", pair));
-            }
+        var key = new CityKey(pair);
+        if (costs.containsKey(key)) {
+            return costs.get(key);
+        } else if (costs.containsKey(key.reverseKey())) {
+            return costs.get(key.reverseKey());
+        } else {
+            throw new RuntimeException(String.format("No costs for %s", pair));
+        }
     }
 }
