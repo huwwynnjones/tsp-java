@@ -1,5 +1,7 @@
 package com.huwwynnjones.tsp;
 
+import java.util.List;
+
 public final class CityKey {
     final String start;
     final String end;
@@ -7,6 +9,15 @@ public final class CityKey {
     CityKey(String start, String end) {
         this.start = start;
         this.end = end;
+    }
+
+    CityKey(List<String> cityPair) {
+        this.start = cityPair.get(0);
+        this.end = cityPair.get(1);
+    }
+
+    CityKey reverseKey() {
+        return new CityKey(this.end, this.start);
     }
 
     @Override
@@ -17,6 +28,13 @@ public final class CityKey {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        var result = 17 + this.start.hashCode();
+        result = 31 * result + this.end.hashCode();
+        return result;
     }
 
     @Override
