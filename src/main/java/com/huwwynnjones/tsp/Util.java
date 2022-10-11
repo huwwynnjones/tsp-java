@@ -9,9 +9,11 @@ import java.util.stream.Collectors;
 
 public class Util {
 
+    private Util() {}
+
     static Set<String> citiesFromCityKeys(HashMap<CityKey, Integer> costs) {
         var keys = costs.keySet();
-        return keys.stream().flatMap((k) -> List.of(k.start, k.end).stream()).collect(Collectors.toSet());
+        return keys.stream().flatMap(k -> List.of(k.start, k.end).stream()).collect(Collectors.toSet());
     }
 
     static List<List<String>> journeyToCityPairs(List<String> journey) {
@@ -27,7 +29,7 @@ public class Util {
     }
 
     static int calculateCost(List<List<String>> cityPairs, HashMap<CityKey, Integer> costs) {
-        return cityPairs.stream().mapToInt((p) -> getCost(p, costs)).sum();
+        return cityPairs.stream().mapToInt(p -> getCost(p, costs)).sum();
     }
 
     private static int getCost(List<String> pair, HashMap<CityKey, Integer> costs) {

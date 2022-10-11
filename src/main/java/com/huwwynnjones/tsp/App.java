@@ -16,7 +16,7 @@ public class App {
     void run() {
         var costs = loadCostsFromFile();
         var cities = Util.citiesFromCityKeys(costs);
-        var permutations = new Permutations<>(new ArrayList<String>(cities));
+        var permutations = new Permutations<>(new ArrayList<>(cities));
         var cheapestJourneys = new ArrayList<List<String>>();
         var lowestCost = Integer.MAX_VALUE;
 
@@ -38,7 +38,7 @@ public class App {
     private HashMap<CityKey, Integer> loadCostsFromFile() {
         var costs = new HashMap<CityKey, Integer>();
         try (var buf = new BufferedReader(new FileReader("cities.txt"))) {
-            buf.lines().forEach((line) -> {
+            buf.lines().forEach(line -> {
                 var mapEntry = MapEntry.stringToMapEntry(line);
                 costs.put(mapEntry.key, mapEntry.cost);
             });

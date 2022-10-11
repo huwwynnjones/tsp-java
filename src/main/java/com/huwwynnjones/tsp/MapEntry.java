@@ -27,6 +27,11 @@ public final class MapEntry {
     }
 
     @Override
+    public int hashCode() {
+        return key.hashCode() + cost;
+    }
+
+    @Override
     public String toString() {
         return String.format("key %s, cost %s", this.key, this.cost);
     }
