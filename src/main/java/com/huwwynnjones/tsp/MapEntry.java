@@ -10,7 +10,7 @@ public final class MapEntry {
     }
 
     static MapEntry stringToMapEntry(String input) {
-        var items = input.split("\s");
+        var items = input.split(" ");
         var key = new CityKey(items[0], items[1]);
         var cost = Integer.parseInt(items[2]);
         return new MapEntry(key, cost);
@@ -18,8 +18,7 @@ public final class MapEntry {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof MapEntry) {
-            var other = (MapEntry) obj;
+        if (obj instanceof MapEntry other) {
             return this.key.equals(other.key) && this.cost == other.cost;
         } else {
             return false;

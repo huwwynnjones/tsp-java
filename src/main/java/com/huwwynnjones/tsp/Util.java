@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Util {
 
@@ -13,12 +14,11 @@ public class Util {
 
     static Set<String> citiesFromCityKeys(HashMap<CityKey, Integer> costs) {
         var keys = costs.keySet();
-        return keys.stream().flatMap(k -> List.of(k.start, k.end).stream()).collect(Collectors.toSet());
+        return keys.stream().flatMap(k -> Stream.of(k.start, k.end)).collect(Collectors.toSet());
     }
 
     static List<List<String>> journeyToCityPairs(List<String> journey) {
-        var stack = new ArrayDeque<String>();
-        stack.addAll(journey);
+        var stack = new ArrayDeque<>(journey);
         var result = new ArrayList<List<String>>();
         while (stack.size() > 1) {
             var first = stack.pollFirst();

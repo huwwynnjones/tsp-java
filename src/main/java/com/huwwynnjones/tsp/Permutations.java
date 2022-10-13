@@ -4,24 +4,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 public class Permutations<T extends List<?>> implements Iterable<T> {
-    private T a;
-    private int n;
-    private List<Integer> p;
+    private final T a;
+    private final int n;
+    private final List<Integer> p;
     private int i;
-    private boolean initial_call;
+    private boolean initialCall;
 
     Permutations(T a) {
         this.a = (T) new ArrayList<>(a);
         n = this.a.size();
         p = createIntegerArray(n);
         i = 1;
-        initial_call = true;
+        initialCall = true;
     }
 
     @Override
@@ -46,32 +47,33 @@ public class Permutations<T extends List<?>> implements Iterable<T> {
 
         @Override
         public T next() {
-            if (Permutations.this.initial_call) {
-                Permutations.this.initial_call = false;
-                return (T) copyOf(Permutations.this.a);
-            } else if (Permutations.this.i < Permutations.this.n) {
-                Permutations.this.p.set(Permutations.this.i, (Permutations.this.p.get(Permutations.this.i) - 1));
-                var j = odd(Permutations.this.i) ? Permutations.this.p.get(Permutations.this.i) : 0;
-                Collections.swap(Permutations.this.a, j, Permutations.this.i);
-                Permutations.this.i = 1;
-                while (Permutations.this.p.get(Permutations.this.i) == 0) {
-                    Permutations.this.p.set(Permutations.this.i, Permutations.this.i);
-                    Permutations.this.i += 1;
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            var self = Permutations.this;
+            if (self.initialCall) {
+                self.initialCall = false;
+                return (T) copyOf(self.a);
+            } else if (self.i < self.n) {
+                self.p.set(self.i, (self.p.get(self.i) - 1));
+                var j = odd(self.i) ? self.p.get(self.i) : 0;
+                Collections.swap(self.a, j, self.i);
+                self.i = 1;
+                while (self.p.get(self.i) == 0) {
+                    self.p.set(self.i, self.i);
+                    self.i += 1;
                 }
             }
-            return (T) copyOf(Permutations.this.a);
+            return (T) copyOf(self.a);
         }
 
-    }
+        private List<?> copyOf(T a) {
+            return new ArrayList<>(a);
+        }
 
-    private List<?> copyOf(T a) {
-        var copy = new ArrayList<>();
-        a.forEach((x) -> copy.add(x));
-        return copy;
-    }
-
-    private boolean odd(int number) {
-        return number % 2 != 0;
+        private boolean odd(int number) {
+            return number % 2 != 0;
+        }
     }
 
     private List<Integer> createIntegerArray(int length) {

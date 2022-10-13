@@ -43,7 +43,7 @@ public class App {
                 costs.put(mapEntry.key, mapEntry.cost);
             });
         } catch (IOException ex) {
-            System.err.println(ex);
+            System.err.println(ex.getMessage());
         }
         return costs;
     }
