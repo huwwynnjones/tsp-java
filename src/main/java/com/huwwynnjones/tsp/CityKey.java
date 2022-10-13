@@ -22,8 +22,7 @@ public final class CityKey {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof CityKey) {
-            var other = (CityKey) obj;
+        if (obj instanceof CityKey other) {
             return this.start.equals(other.start) && this.end.equals(other.end);
         } else {
             return false;

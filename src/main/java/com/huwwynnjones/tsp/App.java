@@ -32,7 +32,7 @@ public class App {
             }
         }
 
-        System.out.println(String.format("Lowest cost %s, cheapest journeys %s", lowestCost, cheapestJourneys));
+        System.out.printf("Lowest cost %s, cheapest journeys %s%n", lowestCost, cheapestJourneys);
     }
 
     private HashMap<CityKey, Integer> loadCostsFromFile() {
