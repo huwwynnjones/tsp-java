@@ -39,7 +39,7 @@ public class App {
         var costs = new HashMap<CityKey, Integer>();
         try (var buf = new BufferedReader(new FileReader("cities.txt"))) {
             buf.lines().forEach(line -> {
-                var mapEntry = MapEntry.stringToMapEntry(line);
+                var mapEntry = MapEntry.from(line);
                 costs.put(mapEntry.key, mapEntry.cost);
             });
         } catch (IOException ex) {
