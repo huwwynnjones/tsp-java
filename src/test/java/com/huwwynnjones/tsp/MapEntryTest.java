@@ -9,6 +9,6 @@ public class MapEntryTest {
     void stringToMapEntry() {
         var input = "A B 80";
         var correct_result = new MapEntry(new CityKey("A", "B"), 80);
-        assertEquals(correct_result, MapEntry.stringToMapEntry(input));
+        assertEquals(correct_result, MapEntry.from(input));
     }
 }

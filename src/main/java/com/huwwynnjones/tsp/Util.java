@@ -14,7 +14,7 @@ public class Util {
 
     static Set<String> citiesFromCityKeys(HashMap<CityKey, Integer> costs) {
         var keys = costs.keySet();
-        return keys.stream().flatMap(k -> Stream.of(k.start, k.end)).collect(Collectors.toSet());
+        return keys.stream().flatMap(k -> Stream.of(k.start(), k.end())).collect(Collectors.toSet());
     }
 
     static List<List<String>> journeyToCityPairs(List<String> journey) {
