@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 public class Permutations<T extends List<?>> implements Iterable<T> {
     private final T a;
@@ -30,11 +28,6 @@ public class Permutations<T extends List<?>> implements Iterable<T> {
         return new Itr();
     }
 
-    public Stream<T> stream() {
-        return StreamSupport.stream(this.spliterator(), false);
-
-    }
-
     private class Itr implements Iterator<T> {
 
         Itr() {
@@ -45,6 +38,11 @@ public class Permutations<T extends List<?>> implements Iterable<T> {
             return Permutations.this.i < Permutations.this.n;
         }
 
+/*
+        quickperm see https://www.baeldung.com/cs/array-generate-all-permutations
+        and https://www.quickperm.org/
+        adapted a bit to be iterable
+*/
         @Override
         public T next() {
             if (!hasNext()) {
