@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Permutations<T extends List<?>> implements Iterable<T> {
+public final class Permutations<T extends List<?>> implements Iterable<T> {
     private final T a;
     private final int n;
     private final List<Integer> p;
