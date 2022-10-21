@@ -46,6 +46,6 @@ public class Util {
     }
 
     static int factorial(int number) {
-        return IntStream.rangeClosed(1, number).reduce(1, (a, b) -> a * b);
+        return IntStream.rangeClosed(1, number).reduce(1, (acc, x) -> acc * x);
     }
 }
