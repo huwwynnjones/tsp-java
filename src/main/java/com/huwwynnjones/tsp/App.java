@@ -1,11 +1,12 @@
 package com.huwwynnjones.tsp;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+
+import static com.huwwynnjones.tsp.Util.citiesFromCityKeys;
+import static com.huwwynnjones.tsp.Util.journeyToCityPairs;
+import static com.huwwynnjones.tsp.Util.calculateCost;
+import static com.huwwynnjones.tsp.Util.loadCostsFromFile;
 
 public class App {
     public static void main(String[] args) {
@@ -15,7 +16,7 @@ public class App {
 
     void run() {
         var costs = loadCostsFromFile();
-        var cities = Util.citiesFromCityKeys(costs);
+        var cities = citiesFromCityKeys(costs);
         var permutations = new Permutations<>(new ArrayList<>(cities));
         var cheapestJourneys = new ArrayList<List<String>>();
         var lowestCost = Integer.MAX_VALUE;
@@ -23,8 +24,8 @@ public class App {
         System.out.printf("Number of permutations %s%n", Util.factorial(cities.size()));
 
         for (var journey : permutations) {
-            var cityPairs = Util.journeyToCityPairs(journey);
-            var currentCost = Util.calculateCost(cityPairs, costs);
+            var cityPairs = journeyToCityPairs(journey);
+            var currentCost = calculateCost(cityPairs, costs);
             if (currentCost < lowestCost) {
                 cheapestJourneys.clear();
                 cheapestJourneys.add(journey);
@@ -35,19 +36,6 @@ public class App {
         }
 
         System.out.printf("Lowest cost %s, cheapest journeys %s%n", lowestCost, cheapestJourneys);
-    }
-
-    private HashMap<CityKey, Integer> loadCostsFromFile() {
-        var costs = new HashMap<CityKey, Integer>();
-        try (var buf = new BufferedReader(new FileReader("cities.txt"))) {
-            buf.lines().forEach(line -> {
-                var mapEntry = MapEntry.from(line);
-                costs.put(mapEntry.key(), mapEntry.cost());
-            });
-        } catch (IOException ex) {
-            System.err.println(ex.getMessage());
-        }
-        return costs;
     }
 
 }

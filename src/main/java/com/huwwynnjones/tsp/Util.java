@@ -1,5 +1,8 @@
 package com.huwwynnjones.tsp;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +15,19 @@ import java.util.stream.Stream;
 public class Util {
 
     private Util() {
+    }
+
+    static HashMap<CityKey, Integer> loadCostsFromFile() {
+        var costs = new HashMap<CityKey, Integer>();
+        try (var buf = new BufferedReader(new FileReader("cities.txt"))) {
+            buf.lines().forEach(line -> {
+                var mapEntry = MapEntry.from(line);
+                costs.put(mapEntry.key(), mapEntry.cost());
+            });
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return costs;
     }
 
     static Set<String> citiesFromCityKeys(HashMap<CityKey, Integer> costs) {
