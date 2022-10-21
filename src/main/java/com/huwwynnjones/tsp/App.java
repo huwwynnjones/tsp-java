@@ -20,6 +20,8 @@ public class App {
         var cheapestJourneys = new ArrayList<List<String>>();
         var lowestCost = Integer.MAX_VALUE;
 
+        System.out.printf("Number of permutations %s%n", Util.factorial(cities.size()));
+
         for (var journey : permutations) {
             var cityPairs = Util.journeyToCityPairs(journey);
             var currentCost = Util.calculateCost(cityPairs, costs);

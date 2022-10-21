@@ -35,4 +35,14 @@ public class UtilTest {
         assertEquals(80, Util.calculateCost(cityPairs, costs));
 
     }
+
+    @Test
+    void factorial() {
+        assertEquals(1, Util.factorial(1));
+        assertEquals(2, Util.factorial(2));
+        assertEquals(6, Util.factorial(3));
+        assertEquals(24, Util.factorial(4));
+        assertEquals(120, Util.factorial(5));
+        assertEquals(1, Util.factorial(0));
+    }
 }

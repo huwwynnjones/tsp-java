@@ -6,11 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Util {
 
-    private Util() {}
+    private Util() {
+    }
 
     static Set<String> citiesFromCityKeys(HashMap<CityKey, Integer> costs) {
         var keys = costs.keySet();
@@ -41,5 +43,9 @@ public class Util {
         } else {
             throw new RuntimeException(String.format("No costs for %s", pair));
         }
+    }
+
+    static int factorial(int number) {
+        return IntStream.rangeClosed(1, number).reduce(1, (a, b) -> a * b);
     }
 }
