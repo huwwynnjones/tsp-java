@@ -9,12 +9,8 @@ import static com.huwwynnjones.tsp.Util.calculateCost;
 import static com.huwwynnjones.tsp.Util.loadCostsFromFile;
 
 public class App {
-    public static void main(String[] args) {
-        var app = new App();
-        app.run();
-    }
 
-    void run() {
+    public static void main(String[] args) {
         var costs = loadCostsFromFile();
         var cities = citiesFromCityKeys(costs);
         var permutations = new Permutations<>(new ArrayList<>(cities));
