@@ -17,15 +17,15 @@ public class Util {
     private Util() {
     }
 
-    static HashMap<CityKey, Integer> loadCostsFromFile() {
+    static HashMap<CityKey, Integer> loadCostsFromFile(String filename) throws IOException {
         var costs = new HashMap<CityKey, Integer>();
-        try (var buf = new BufferedReader(new FileReader("cities.txt"))) {
+        try (var buf = new BufferedReader(new FileReader(filename))) {
             buf.lines().forEach(line -> {
                 var mapEntry = MapEntry.from(line);
                 costs.put(mapEntry.key(), mapEntry.cost());
             });
         } catch (IOException ex) {
-            System.err.println(ex.getMessage());
+            throw new IOException(ex);
         }
         return costs;
     }

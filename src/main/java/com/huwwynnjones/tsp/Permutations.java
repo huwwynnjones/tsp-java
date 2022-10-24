@@ -8,15 +8,15 @@ import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public final class Permutations<T extends List<?>> implements Iterable<T> {
-    private final T a;
+public final class Permutations<T extends List<E>, E> implements Iterable<List<E>> {
+    private final List<E> a;
     private final int n;
     private final List<Integer> p;
     private int i;
     private boolean initialCall;
 
     Permutations(T a) {
-        this.a = (T) new ArrayList<>(a);
+        this.a = new ArrayList<>(a);
         n = this.a.size();
         p = createIntegerArray(n);
         i = 1;
@@ -24,11 +24,11 @@ public final class Permutations<T extends List<?>> implements Iterable<T> {
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public Iterator<List<E>> iterator() {
         return new Itr();
     }
 
-    private class Itr implements Iterator<T> {
+    private class Itr implements Iterator<List<E>> {
 
         Itr() {
         }
@@ -38,20 +38,20 @@ public final class Permutations<T extends List<?>> implements Iterable<T> {
             return Permutations.this.i < Permutations.this.n;
         }
 
-/*
-        quickperm see https://www.baeldung.com/cs/array-generate-all-permutations
-        and https://www.quickperm.org/
-        adapted a bit to be iterable
-*/
+        /*
+         * quickperm see https://www.baeldung.com/cs/array-generate-all-permutations
+         * and https://www.quickperm.org/
+         * adapted a bit to be iterable
+         */
         @Override
-        public T next() {
+        public List<E> next() {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
             var self = Permutations.this;
             if (self.initialCall) {
                 self.initialCall = false;
-                return (T) copyOf(self.a);
+                return copyOf(self.a);
             } else if (self.i < self.n) {
                 self.p.set(self.i, (self.p.get(self.i) - 1));
                 var j = odd(self.i) ? self.p.get(self.i) : 0;
@@ -62,10 +62,10 @@ public final class Permutations<T extends List<?>> implements Iterable<T> {
                     self.i += 1;
                 }
             }
-            return (T) copyOf(self.a);
+            return copyOf(self.a);
         }
 
-        private List<?> copyOf(T a) {
+        private List<E> copyOf(List<E> a) {
             return new ArrayList<>(a);
         }
 
