@@ -35,16 +35,6 @@ public class App {
 
             System.out.printf("Lowest cost %s, cheapest journeys %s%n", lowestCost, cheapestJourneys);
 
-<<<<<<< HEAD
-    private HashMap<CityKey, Integer> loadCostsFromFile() {
-        var costs = new HashMap<CityKey, Integer>();
-        try (var buf = new BufferedReader(new FileReader("cities.txt"))) {
-            buf.lines().forEach(line -> {
-                var mapEntry = MapEntry.from(line);
-                costs.put(mapEntry.key, mapEntry.cost);
-            });
-=======
->>>>>>> with_records
         } catch (IOException ex) {
             System.err.printf("Unable to load file %s", ex);
         }

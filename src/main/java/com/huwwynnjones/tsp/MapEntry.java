@@ -1,18 +1,6 @@
 package com.huwwynnjones.tsp;
 
-<<<<<<< HEAD
-public final class MapEntry {
-    final CityKey key;
-    final int cost;
-
-    MapEntry(CityKey key, int cost) {
-        this.key = key;
-        this.cost = cost;
-    }
-
-=======
-record MapEntry (CityKey key, int cost) {
->>>>>>> with_records
+record MapEntry(CityKey key, int cost) {
     static MapEntry from(String input) {
         var items = input.split(" ");
         var key = new CityKey(items[0], items[1]);
